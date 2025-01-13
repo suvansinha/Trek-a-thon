@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFC400, #FF9100, #DD2C00);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="Username"],
+        input[type="password"] {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #DD2C00; 
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background:#FF9100;
+        }
+
+        .toggle-link {
+            margin-top: 15px;
+            cursor: pointer;
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        .toggle-link:hover {
+            color: #DD2C00;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="form-title">Login</h1>
+        <form id="auth-form">
+            <input type="Username" id="Username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" id="form-button">Login</button>
+        </form>
+        <p class="toggle-link" onclick="toggleForm()">Don't have an account? Signup</p>
+    </div>
+
+    <script>
+        const formTitle = document.getElementById('form-title');
+        const authForm = document.getElementById('auth-form');
+        const formButton = document.getElementById('form-button');
+        const toggleLink = document.querySelector('.toggle-link');
+
+        function toggleForm() {
+            if (formTitle.textContent === 'Login') {
+                formTitle.textContent = 'Create Account';
+                formButton.textContent = 'Signup';
+                toggleLink.textContent = 'Already have an account? Login';
+                const confirmPassword = document.createElement('input');
+                confirmPassword.type = 'password';
+                confirmPassword.id = 'confirm-password';
+                confirmPassword.placeholder = 'Confirm Password';
+                confirmPassword.required = true;
+                authForm.insertBefore(confirmPassword, formButton);
+            } else {
+                formTitle.textContent = 'Login';
+                formButton.textContent = 'Login';
+                toggleLink.textContent = "Don't have an account? Signup";
+                const confirmPassword = document.getElementById('confirm-password');
+                if (confirmPassword) {
+                    authForm.removeChild(confirmPassword);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
